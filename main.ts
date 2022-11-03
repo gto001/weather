@@ -7,34 +7,42 @@ bluetooth.onBluetoothDisconnected(function () {
 bluetooth.onUartDataReceived(serial.delimiters(Delimiters.NewLine), function () {
     data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
     basic.showString(data)
-    basic.pause(2000)
-    if (parseFloat(data) == 0) {
+    basic.pause(100)
+    num = parseFloat(data)
+    if (num == 0) {
         pins.servoWritePin(AnalogPin.P0, 0)
-    } else if (parseFloat(data) == 1) {
+    } else if (num == 1) {
         pins.servoWritePin(AnalogPin.P0, 45)
-    } else if (parseFloat(data) == 2) {
+    } else if (num == 2) {
         pins.servoWritePin(AnalogPin.P0, 90)
-    } else if (parseFloat(data) == 3) {
+    } else if (num == 3) {
         pins.servoWritePin(AnalogPin.P0, 135)
-    } else if (parseFloat(data) == 4) {
+    } else if (num == 4) {
         pins.servoWritePin(AnalogPin.P0, 180)
     }
     data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
     basic.showString(data)
-    basic.pause(2000)
-    if (parseFloat(data) <= 0) {
-        pins.servoWritePin(AnalogPin.P1, 180 / 70 * (20 - Math.abs(parseFloat(data))))
-    } else if (parseFloat(data) >= 0) {
-        pins.servoWritePin(AnalogPin.P1, 180 / 70 * parseFloat(data))
+    basic.pause(100)
+    num = parseFloat(data)
+    if (num <= -15) {
+        pins.servoWritePin(AnalogPin.P1, 0)
+    } else if (num >= 45) {
+        pins.servoWritePin(AnalogPin.P1, 180)
+    } else {
+        pins.servoWritePin(AnalogPin.P1, (15 + num) * 3)
     }
     data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
     basic.showString(data)
-    basic.pause(2000)
-    if (parseFloat(data) <= 0) {
-        pins.servoWritePin(AnalogPin.P2, 180 / 70 * (20 - Math.abs(parseFloat(data))))
-    } else if (parseFloat(data) >= 0) {
-        pins.servoWritePin(AnalogPin.P2, 180 / 70 * parseFloat(data))
+    basic.pause(100)
+    num = parseFloat(data)
+    if (num <= -15) {
+        pins.servoWritePin(AnalogPin.P2, 0)
+    } else if (num >= 45) {
+        pins.servoWritePin(AnalogPin.P2, 180)
+    } else {
+        pins.servoWritePin(AnalogPin.P2, (15 + num) * 3)
     }
 })
+let num = 0
 let data = ""
 bluetooth.startUartService()

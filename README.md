@@ -10,7 +10,7 @@
 * ギアボタンメニューの中にある **拡張機能** をクリックしてください
 * **https://github.com/gto001/weather** を検索してインポートします。
 
-## このプロジェクトを編集します ![ビルド ステータス バッジ](https://github.com/gto001/weather/workflows/MakeCode/badge.svg)
+## このプロジェクトを編集します ![ビルド ステータス バッジ](https://github.com/gto001/weather/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master)
 
 MakeCode でこのリポジトリを編集します。
 

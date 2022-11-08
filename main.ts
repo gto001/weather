@@ -5,8 +5,7 @@ bluetooth.onBluetoothDisconnected(function () {
     basic.showIcon(IconNames.No)
 })
 bluetooth.onUartDataReceived(serial.delimiters(Delimiters.NewLine), function () {
-    data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
-    basic.showString(data)
+    data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.Comma))
     num = parseFloat(data)
     if (num == 0) {
         pins.servoWritePin(AnalogPin.P0, 0)
@@ -19,8 +18,7 @@ bluetooth.onUartDataReceived(serial.delimiters(Delimiters.NewLine), function () 
     } else if (num == 4) {
         pins.servoWritePin(AnalogPin.P0, 155)
     }
-    data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
-    basic.showString(data)
+    data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.Comma))
     num = parseFloat(data)
     if (num <= -15) {
         pins.servoWritePin(AnalogPin.P1, 180)
@@ -29,8 +27,7 @@ bluetooth.onUartDataReceived(serial.delimiters(Delimiters.NewLine), function () 
     } else {
         pins.servoWritePin(AnalogPin.P1, 180 - (15 + num) * 3)
     }
-    data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
-    basic.showString(data)
+    data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.Comma))
     num = parseFloat(data)
     if (num <= -15) {
         pins.servoWritePin(AnalogPin.P2, 0)
